@@ -8,6 +8,12 @@ plusOneSum([1, 2, 3, 4]); // 14
 
 */
 
+var plusOneSum = arr => {
+    let newArr = arr.map(val => val + 1);
+    let result = 0;
+    newArr.forEach(val => result += val);
+    return result;
+};
 
 
 /*
@@ -17,6 +23,20 @@ Write a function that accepts a multi dimensional array and returns a flattened 
 flatten([1, 2, [3, [4], 5, 6], 7]) // [1, 2, 3, 4, 5, 6, 7]
 
 */
+var flattenFunc = (arr, result) => {
+    arr.forEach(val => {
+        if (Array.isArray(val)) {
+            return flattenFunc(val, result);
+        }
+        else result.push(val);
+    });
+};
+
+var flatten = arr => {
+    var result = [];
+    flattenFunc(arr,result);
+    return result;
+};
 
 
 
@@ -26,20 +46,33 @@ Given an array [a1, a2, ..., aN, b1, b2, ..., bN, c1, c2, ..., cN] convert it to
 
 */
 
+var convertByN = (arr, n) => {
+    var result = [];
+    for (let i=0;i<=n;i++) {
+        arr.forEach(val => result.push(val));
+    }
+    return result;
+};
 
 /*
 
-There is an array of non-negative integers. A second array is formed by shuffling the elements of the first array and deleting a random element. Given these two arrays, find which element is missing in the second array.
+There is an array of non-negative integers. A second array is formed by shuffling the elements of the first array 
+and deleting a random element. Given these two arrays, find which element is missing in the second array.
 
 */
 
-
+var findMissing = (arr1, arr2) => {
+    for (let i in arr1) {
+        if (arr2.indexOf(arr1[i]) === -1) return arr1[i];
+    }
+}
 
 
 
 /*
 
-Write a function that returns the longest word(s) from a sentence. The function should not return any duplicate words (case-insensitive).
+Write a function that returns the longest word(s) from a sentence. The function should not return any duplicate words 
+(case-insensitive).
 
 Example
 
@@ -61,7 +94,8 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 /*
 
-Remove duplicate characters in a given string keeping only the first occurrences. For example, if the input is ‘tree traversal’ the output will be "tre avsl".
+Remove duplicate characters in a given string keeping only the first occurrences. For example, if the input is 
+‘tree traversal’ the output will be "tre avsl".
 
 */
 

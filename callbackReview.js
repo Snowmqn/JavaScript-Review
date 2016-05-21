@@ -6,9 +6,9 @@ var first = function(arr, cb) {
 
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
-first(names, function(firstName){
-  console.log('The first name in names is ', firstName)
-});
+// first(names, function(firstName){
+//   console.log('The first name in names is ', firstName)
+// });
 
 
 
@@ -21,9 +21,9 @@ var last = function(arr, cb) {
 
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
-last(names, function(lastName){
-  console.log('The last name in names is ', lastName);
-});
+// last(names, function(lastName){
+//   console.log('The last name in names is ', lastName);
+// });
 
 
 
@@ -32,23 +32,34 @@ last(names, function(lastName){
 
 //have the contains function return a boolean value for if the name is in the array or not.
 
-
-
+var contains = (str, arr, cb) => {
+  let test = false;
+  arr.forEach(val => {
+    if (val === str) test = true;
+  });
+  cb(test);
+  return test;
+}
+  
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
-contains('Colt', names, function(yes){
-  if(yes){
-    console.log('Colt is in the array');
-  } else {
-    console.log('Colt is not in the list');
-  }
-});
+// contains('Colt', names, function(yes){
+//   if(yes){
+//     console.log('Colt is in the array');
+//   } else {
+//     console.log('Colt is not in the list');
+//   }
+// });
 
 
 
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
+var map = (arr, cb) => {
+  let result = [];
+  arr.forEach(val => result.push(cb(val)));
+  return result;
+}
 
 
 var numbers = [1,2,3,4,5];
@@ -62,26 +73,36 @@ map(numbers, function(num){
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
+var uniq = (arr, cb) => {
+  let result = arr.slice(0);
+  result.forEach(val => {
+    while(result.indexOf(val, result.indexOf(val) + 1) !== -1) {
+      result.splice(result.indexOf(val, result.indexOf(val) + 1), 1);
+    }
+  });
+  cb(result);
+}
 
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
-uniq(names, function(uniqArr){
-  console.log('The new names array with all the duplicate items removed is ', uniqArr);
-});
+// uniq(names, function(uniqArr){
+//   console.log('The new names array with all the duplicate items removed is ', uniqArr);
+// });
 
 
 
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
+var each = (arr, cb) => {
+  arr.forEach((val, i) => cb(val, i));
+};
 
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
-each(names, function(item, indice){
-  console.log('The item in the ' + indice + 'position is ' + item)
-});
+// each(names, function(item, indice){
+//   console.log('The item in the ' + indice + 'position is ' + item)
+// });
 
 
 
@@ -111,16 +132,33 @@ var users = [
     address: '192 East 32 North'
   },
 ];
-getUserById('16t', users, function(user){
-  console.log('The user with the id 16t has the email of ' + user.email + 'the name of ' + user.name + ' and the address of ' + user.address); 
-});
+
+var getUserById = (val, userArr, cb) => {
+  for (let i in userArr) if (userArr[i].id === val) cb(userArr[i]);
+};
+
+// getUserById('16t', users, function(user){
+//   console.log('The user with the id 16t has the email of ' + user.email + 'the name of ' + user.name + ' and the address of ' + user.address); 
+// });
 
 
 
 
 /* NEXT PROBLEM - NEXT PROBLEM - NEXT PROBLEM */
 
-
+var find = (arr, cb) => {
+  var result;
+  var test = true;
+  arr.forEach(val => {
+    if (cb(val)) {
+      if (test){
+        result = val;
+        test = false;
+      }
+    }
+  });
+  return result;
+};
 
 
 //Looks through each value in the list, returning the first one that passes a truth test 

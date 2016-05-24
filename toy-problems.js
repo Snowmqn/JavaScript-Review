@@ -82,6 +82,19 @@ longestWords("Buffalo buffalo Buffalo buffalo buffalo buffalo Buffalo buffalo") 
 
 */
 
+var longestWords = str => {
+    var result = [''];
+    let temp = '';
+    for (let i=0;i<str.length;i++) {
+        if (str[i] !== ' ') {
+            temp += str[i];
+            if (temp.length > result[0].length) result = [temp];
+            else if (temp.length === result[0].length) result.push(temp);
+        }
+        else temp = '';
+    }
+    return result;
+}
 
 /*
 
@@ -91,6 +104,13 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 */
 
+var findMultiples = num => {
+    var result = [];
+    for (let i=3;i<=num;i++) {
+        if (num % 3 === 0 || num % 5 === 0) result.push(i);
+    }
+    return result;
+}
 
 /*
 
@@ -99,7 +119,14 @@ Remove duplicate characters in a given string keeping only the first occurrences
 
 */
 
-
+var removeDuplicate = str => {
+    var arr = str.split('');
+    var result = [];
+    arr.forEach(val => {
+        if (result.indexOf(val) === -1) result.push(val);
+    })
+    return result.join('');
+}
 
 /*
 Write a sum method which will work properly when invoked using either syntax below.
@@ -108,3 +135,16 @@ console.log(sum(2,3));   // Outputs 5
 console.log(sum(2)(3));  // Outputs 5
 
 */
+
+var sum = function() {
+    var total = 0;
+    var arr = Array.from(arguments);
+    var temp = arr[0]
+    if (arr.length > 1) {
+        for (let i in arr) total += arr[i];
+        return total;
+    }
+    else return val => {
+        return temp + val;
+    }
+}
